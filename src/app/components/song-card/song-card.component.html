@@ -1,0 +1,25 @@
+<div>
+  <div class ="header">
+    <h4> {{data.name}} by {{data.artist_name}}</h4>
+  </div>
+    <div class="main-box">
+    <div class="left-side">
+        <div class="label-container">
+            <p style  = "color:gray"> Price: {{data.price}}</p>
+          </div>
+        <div class="label-container">
+          <p style  = "color:gray"> Song By: {{data.rights}} </p>
+        </div>
+        <div class="label-container">
+          <p style  = "color:gray"> Released On: {{data.releaseDate}} </p>
+        </div>
+    </div>
+  <div class="right-side">
+    <img class="card-img-top" src="{{data.imageSource}}" alt="Card image cap">
+  </div>
+  </div>
+  <div class="footer">
+      <a  class="btn btn-primary" target="_blank" href="{{data.link}}">Check Out the Song</a>
+    <button  type="button" style = "margin:5px" (click)="onclose()" class="btn btn-secondary">Close</button>
+  </div>
+</div>

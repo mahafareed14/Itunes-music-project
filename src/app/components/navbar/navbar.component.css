@@ -1,0 +1,7 @@
+
+.search-icon {
+    position: absolute;
+    z-index: 1;
+    left: 33%;
+    color: teal;
+}

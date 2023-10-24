@@ -1,0 +1,68 @@
+<div class="container d-flex" style="margin-top: 1.5%">
+    <div>
+        <button (click)="filter('')" class="btn btn-primary">
+            <h6>All Songs</h6>
+        </button>
+    </div>
+    <div style="margin-left: 1%;">
+        <button (click)="filter('favourites')"class="btn btn-primary">
+            <h6>Favourites</h6>
+        </button>
+    </div>
+
+    <div ngbDropdown style="margin-left: 1%;">
+        <button type="button" class="btn btn-primary" id="dropdown" ngbDropdownToggle>
+                    Categories
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdown">
+            <div *ngFor="let category of categories">
+            <button ngbDropdownItem (click)="selectCategory(category)"> {{category}}</button>
+            </div>
+        </div>
+    </div>
+    <div ngbDropdown style="margin-left: 1%;">
+        <button type="button" class="btn btn-primary" id="dropdown" ngbDropdownToggle>
+                    Singer
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdown">
+            <div *ngFor="let singer of singers">
+            <button ngbDropdownItem (click)="selectSingers(singer)"> {{singer}}</button>
+            </div>
+        </div>
+    </div>
+    <div style = "margin-left: 25%;" *ngIf = "tunes.length">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 2%">
+    <div class="row">
+        <div *ngIf = "tunes.length > 0" >
+            <h4 class="mb-3">
+                Showing {{(tunes | filter: searchKey: 'name,artist_name').length}} Songs
+            </h4>
+        </div>
+    </div>
+	<div class="row" *ngIf="tunes.length > 0">
+        <ng-container *ngFor="let tune of tunes | filter: searchKey: 'name,artist_name'
+        | paginate: { itemsPerPage: 10, currentPage: page, 
+            totalItems: (tunes | filter: searchKey: 'name,artist_name').length }">
+            <div class="card col-md-3">
+                <div (click)="openDialog(tune)">
+                <img src="{{tune.imageSource}}" alt="">
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 50ch;">{{tune.artist_name}}</h5>
+                <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 50ch;">{{tune.name}}</p>
+                </div>
+                <i (click)="toggleFavourites(tune)" class = "fa fa-heart heart" aria-hidden="true"
+                [ngStyle]="{'color':tune.liked ? 'red' : 'white' }"></i>
+            </div>
+        </ng-container>
+	</div>
+    <ng-container *ngIf="(tunes | filter: searchKey: 'name,artist_name').length == 0">
+        <div class="container">
+            <div class="center">
+                <h6>No Songs Available</h6>
+            </div>
+        </div>
+    </ng-container>
+</div>

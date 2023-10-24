@@ -1,0 +1,11 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <h1> Apple ITunes </h1>
+    
+    <div class="collapse navbar-collapse pull-right" style = "margin-left: 10px;">
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)" placeholder="Search Songs"
+        style = "width: 460px;">
+      </div>
+      <span class="fas fa-search search-icon" style = "margin-left: 13%;"></span>
+    </div>
+  </nav>
